@@ -397,6 +397,13 @@ color: white;
     align-items: center; /* Horizontally center align arrows */
     justify-content: center; /* Vertically center align arrows */
   }
+
+  @media (max-width: 400px) {
+    .arrow-con {
+      margin-top: 3%;
+
+    }
+}
   
   .arrow-con i {
     border-color: transparent;
