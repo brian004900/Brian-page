@@ -6,10 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <style>
-    .pdf {
+    .pdf-viewer {
         width: 100%;
-        height: auto; /* Adjust height based on aspect ratio */
-        aspect-ratio: 4 / 3; /* Maintain aspect ratio */
+        height: 500px; /* Fixed height or you can make it responsive with vh units */
     }
 
     html, body {
@@ -42,8 +41,9 @@
             <button style="padding: 15px 30px; font-size: 18px; cursor: pointer; transition: background-color 0.3s;">Code</button>
         </a>
     </div>
-       
-    <embed class="pdf" src="./pdfs/R.pdf" alt="PDF not supported on your device. Click here to download.">
+
+    <iframe class="pdf-viewer" src="./pdfs/R.pdf"></iframe>
+    <p>If the document does not display correctly, please <a href="./pdfs/R.pdf" download="R_Analysis.pdf">download the PDF</a>.</p>
 </body>
 
 </html>
