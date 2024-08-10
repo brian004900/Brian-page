@@ -1,43 +1,47 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Time Series Analysis</title>
-    <style>
-        .iframe {
-            width: 100% !important; /* Ensures the iframe takes up the full width */
-            height: auto; /* Responsive height based on the content */
-            aspect-ratio: 16 / 9; /* Maintains a fixed aspect ratio */
-            border: none; /* Removes border around the iframe */
-        }
-
-        html, body {
-            height: 100%; /* Full height for the body to expand as needed */
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden; /* Prevents horizontal scrolling */
-        }
-
-        h1, h3 {
-            text-align: center;
-        }
-
-        h1 {
-            color: rgb(68, 152, 255);
-        }
-
-        button:hover {
-            background-color: rgb(68, 152, 255);
-            color: aliceblue;
-        }
-    </style>
 </head>
+<style>
+    iframe {
+        width: 100%;
+        height: 100%;
+    }
+
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    h1, h3 {
+        text-align: center;
+    }
+
+    h1 {
+        color: rgb(68, 152, 255);
+    }
+
+    button:hover {
+        background-color: rgb(68, 152, 255);
+        color: aliceblue;
+    }
+</style>
+
 <body>
     <h1>Sales and Customer Time Series Prediction with R</h1>
     <div style="text-align: center;">
-        <a href="https://www.kaggle.com/datasets/vivek468/superstore-dataset-final"><button style="padding: 15px 30px; font-size: 18px; cursor: pointer; transition: background-color 0.3s;">Dataset</button></a>
-        <a href="https://drive.google.com/file/d/1md6dc67qRnDkwe6IJ45fVyIWWv3LgSqH/view?usp=share_link"><button style="padding: 15px 30px; font-size: 18px; cursor: pointer; transition: background-color 0.3s;">Code</button></a>
+        <a href="https://www.kaggle.com/datasets/vivek468/superstore-dataset-final">
+            <button style="padding: 15px 30px; font-size: 18px; cursor: pointer; transition: background-color 0.3s;">Dataset</button>
+        </a>
+        <a href="https://drive.google.com/file/d/1md6dc67qRnDkwe6IJ45fVyIWWv3LgSqH/view?usp=share_link">
+            <button style="padding: 15px 30px; font-size: 18px; cursor: pointer; transition: background-color 0.3s;">Code</button>
+        </a>
     </div>
-    <!-- Using iframe for better compatibility on mobile devices -->
-    <iframe class="iframe" src="./pdfs/R.pdf"></iframe>
+
+    <iframe src="./pdfs/R.pdf"></iframe>
 </body>
+
 </html>
