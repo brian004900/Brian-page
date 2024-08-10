@@ -1,0 +1,487 @@
+/* global */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+    background-image: url('city2.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    overscroll-behavior: contain; /* or auto */
+    background-color: #2e363f;
+  }
+
+html::before {
+content: "";
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.5); /* 调整透明度和颜色 */
+z-index: -1;
+}
+
+html {
+  overflow: auto;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+
+#scroll-progress {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 6px;
+background-color: transparent;
+z-index: 9999;
+}
+  
+  
+  
+
+/* 修改橡皮筋效果的顏色為藍色 */
+/* 將滾動條設置為水平方向 */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* 滾動條背景色 */
+  ::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.547);
+  }
+  
+  /* 滾動條手柄的顏色 */
+  ::-webkit-scrollbar-thumb {
+    background-color: mediumturquoise;
+  }
+
+  
+
+
+li,
+a,
+button {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: white;
+    text-decoration: none;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 10%;
+    justify-content: right;
+}
+
+
+/* nav bar */
+
+.nav_links {
+    border: 2px solid pink;
+    padding: 10px;
+    list-style: none;
+    margin-right: 150px;
+    position: fixed;
+    left: 70%; 
+    z-index: 9999; /* 设置较高的 z-index 值 */
+    background-color:  rgba(0, 0, 0, 0.547);
+}
+
+.nav_links li {
+    display: inline-block;
+    padding: 0 10px;
+    background-color: transparent;
+}
+
+.nav_links li a {
+    transition: all 0.3s ease 0s;
+    font-size: large;
+    background-color: transparent;
+}
+
+.nav_links li a:focus {
+    outline: none;
+}
+
+.nav_links li a:hover {
+    color: pink;
+}
+
+@media screen and (max-width: 768px) {
+
+
+    .nav_links li {
+        display: block;
+        padding: 10px 0;
+        margin-right: 10px;
+    }
+
+    .nav_links {
+        border: 2px solid pink;
+        padding: 10px;
+        list-style: none;
+        margin-right: auto;
+    }
+
+}
+
+.content {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 18px;
+    
+}
+
+@media (max-width: 1066px) {
+    .content {
+        margin-top: 50px;
+        
+    }
+}
+
+@media (max-width: 768px) {
+    .content {
+        margin-top: 100px;
+        
+    }
+}
+
+.mytitle {
+    display: flex;
+    justify-content: center;
+    margin-top: 60px; 
+}
+@media (max-width: 768px) {
+  .mytitle {
+    flex-direction: column;
+    align-items: center; /* Center items horizontally */
+  }
+}
+
+
+.mytitle h1{
+    margin-left: -20px;
+}
+
+.image-container {
+  margin-top: -100px;
+  width: 460px;
+  height: 460px;
+  object-fit: cover;
+  object-position: 100% 0;
+  border-radius: 50%;
+  margin-left: -30px;
+  mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 0) 60%);
+  -webkit-mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 0) 60%);
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+
+    .image-container {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+
+
+
+.project-place{
+    width: 99%;
+    position: relative;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 100px;
+    background-color: transparent;
+}
+
+.project-card {
+    width: 450px;
+    position: relative;
+    transition: filter 0.3s;
+    margin-top: 5%;
+    margin-bottom: 30px;
+    cursor: pointer;
+    visibility: hidden;
+}
+
+.project-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 5%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.project-card:hover .project-image {
+    filter: brightness(20%);
+    transition: all 1s;
+}
+
+.project-name {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+    font-size: 24px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    text-align: center;
+    width: 100%;
+    background-color: transparent;
+    color: mediumturquoise;
+}
+
+
+.project-card:hover .project-name {
+    opacity: 1;
+}
+
+.project-card.slide-in {
+  animation: fade-out 3s forwards;
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+@media (max-width: 450px) {
+    .mytitle{
+        margin-bottom: 60px;
+        margin-top: 150px;
+    }
+
+    .project-place{
+        margin-top: 60px;
+    }
+
+    .project-card {
+        width: 100%;
+    }
+}
+
+/* belows content */
+
+.contact-buttom{
+    margin-bottom: 50px;
+    text-align: center;
+    line-height: 180%;
+}
+
+.contact-buttom h4{
+    font-weight: 1;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 80%;
+}
+
+.allAbout {
+    text-align: center;
+    margin-top: 10%;
+  }
+  
+  .about1 {
+    margin-top: 30px;
+    margin-bottom: 10%;
+    max-width: 600px;
+    width: 90%;
+    height: auto;
+    background-color: rgba(0, 0, 0, 0.668);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    letter-spacing: 2px;
+    line-height: 1.5;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  
+
+.about1 * {
+    background-color: transparent;
+    color: white;
+}
+
+.aboutin.slide-in {
+    animation: fade-out 3s forwards;
+  }
+  
+  @keyframes fade-out {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+@media (max-width: 600px) {
+    .allAbout{
+        text-align: left;
+    }
+    .about1 {
+        width: 100%;
+        margin-left: 0;
+
+    }
+}
+
+.card-button {
+    /* Button styles */
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    padding: 10px 20px;
+    background-color: white;
+    color: rgba(0, 0, 0, 0.818);
+    border: none;
+    border-radius: 5px;
+    letter-spacing: 2px;
+    font-weight: bold;
+    width: 110px;
+    height: 45px;
+  }
+
+.card-button:hover {
+background-color: pink;
+color: white;
+}
+
+
+.arrow {
+    border: solid transparent;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 5px;
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+  }
+  
+  .down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+  }
+  
+  .arrow-con {
+    margin-top: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Horizontally center align arrows */
+    justify-content: center; /* Vertically center align arrows */
+  }
+  
+  .arrow-con i {
+    border-color: transparent;
+    transition: border-color 0.5s;
+    margin-bottom: 10px; /* Add margin to separate arrows vertically */
+  }
+  
+  .arrow-con i.active {
+    border-color: pink;
+  }
+
+
+.container {
+display: flex;
+flex-direction: column;
+align-items: stretch;
+margin-top: 35px;
+}
+
+.row {
+display: flex;
+justify-content: center;
+margin-bottom: 30px;
+}
+
+.input, .textarea {
+background-color: white;
+color: black;
+font-weight: bold;
+margin-right: 10px;
+padding: 5px;
+font-family: Arial, Helvetica, sans-serif;
+width: 100%;
+height: 50px;
+letter-spacing: 2px;
+border-radius: 5px;
+}
+
+.textarea {
+    height: 100px;
+}
+
+input::placeholder:after {
+    content: "*";
+    color: pink;
+  }
+  
+
+.button {
+background-color: white;
+padding: 10px 20px;
+border: none;
+border-radius: 5px;
+letter-spacing: 2px;
+font-weight: bold;
+border-radius: 5px;
+color: rgba(0, 0, 0, 0.818);
+width: 110px;
+height: 45px;
+}
+
+.button:hover {
+    background-color: pink;
+    color: white;
+    }
+
+.input:focus {
+    background-color: rgb(255, 223, 228);
+    outline: none;
+}
+
+/* styles.css */
+@keyframes slideIn {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  /* 设置过渡效果 */
+  .html {
+    animation: slideIn 0.5s ease-in-out;
+  }
+
+  
+  
