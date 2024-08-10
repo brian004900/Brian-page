@@ -3,22 +3,28 @@
 <head>
     <title>Time Series Analysis</title>
     <style>
+        .iframe {
+            width: 100% !important; /* Ensures the iframe takes up the full width */
+            height: auto; /* Responsive height based on the content */
+            aspect-ratio: 16 / 9; /* Maintains a fixed aspect ratio */
+            border: none; /* Removes border around the iframe */
+        }
+
         html, body {
-            height: 100%;
+            height: 100%; /* Full height for the body to expand as needed */
             margin: 0;
             padding: 0;
-            overflow: hidden;
+            overflow-x: hidden; /* Prevents horizontal scrolling */
         }
-        .pdf-viewer {
-            width: 100%;
-            height: 100%;
-        }
+
         h1, h3 {
             text-align: center;
         }
+
         h1 {
             color: rgb(68, 152, 255);
         }
+
         button:hover {
             background-color: rgb(68, 152, 255);
             color: aliceblue;
@@ -31,8 +37,7 @@
         <a href="https://www.kaggle.com/datasets/vivek468/superstore-dataset-final"><button style="padding: 15px 30px; font-size: 18px; cursor: pointer; transition: background-color 0.3s;">Dataset</button></a>
         <a href="https://drive.google.com/file/d/1md6dc67qRnDkwe6IJ45fVyIWWv3LgSqH/view?usp=share_link"><button style="padding: 15px 30px; font-size: 18px; cursor: pointer; transition: background-color 0.3s;">Code</button></a>
     </div>
-    <object data="./pdfs/R.pdf" type="application/pdf" class="pdf-viewer">
-        <p>Your browser does not support PDFs. Please download the PDF to view it: <a href="./pdfs/R.pdf">Download PDF</a>.</p>
-    </object>
+    <!-- Using iframe for better compatibility on mobile devices -->
+    <iframe class="iframe" src="./pdfs/R.pdf"></iframe>
 </body>
 </html>
