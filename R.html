@@ -1,38 +1,87 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Time Series Analysis</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #canvas-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        canvas {
+            border: 1px solid black;
+            width: 100%;
+            height: auto;
+        }
+    </style>
 </head>
-<style>
-    .pdf {
-        width: 100%;
-        height: 100%;
-    }
-
-    html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-    }
-    h1, h3 {
-        text-align: center;
-    }
-
-    h1 {
-        color: rgb(68, 152, 255);
-    }
-    button:hover {
-        background-color: rgb(68, 152, 255);
-        color: aliceblue;
-    }
-</style>
 <body>
-    <h1>Sales and Customer Time Series Prediction with R</h1>
+    <h1 style="text-align: center; color: rgb(68, 152, 255);">Sales and Customer Time Series Prediction with R</h1>
     <div style="text-align: center;"> 
         <a href="https://www.kaggle.com/datasets/vivek468/superstore-dataset-final"><button style="padding: 15px 30px; font-size: 18px; cursor: pointer; transition: background-color 0.3s;">Dataset</button></a>
         <a href="https://drive.google.com/file/d/1md6dc67qRnDkwe6IJ45fVyIWWv3LgSqH/view?usp=share_link"><button style="padding: 15px 30px; font-size: 18px; cursor: pointer; transition: background-color 0.3s;">Code</button></a>
     </div>
-    <!-- Embed PDF using Google Docs Viewer for better compatibility -->
-    <iframe class="pdf" src="https://docs.google.com/viewer?srcid=1md6dc67qRnDkwe6IJ45fVyIWWv3LgSqH&pid=explorer&efh=false&a=v&chrome=false&embedded=true" style="border: none;"></iframe>
+    <div id="canvas-container">
+        <canvas id="pdf-render"></canvas>
+    </div>
+
+    <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+    <script>
+        const url = './pdfs/R.pdf';
+
+        let pdfDoc = null,
+            pageNum = 1,
+            pageRendering = false,
+            pageNumPending = null,
+            scale = 1.5,
+            canvas = document.getElementById('pdf-render'),
+            ctx = canvas.getContext('2d');
+
+        function renderPage(num) {
+            pageRendering = true;
+            pdfDoc.getPage(num).then(function(page) {
+                var viewport = page.getViewport({scale: scale});
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                var renderContext = {
+                    canvasContext: ctx,
+                    viewport: viewport
+                };
+                var renderTask = page.render(renderContext);
+
+                renderTask.promise.then(function() {
+                    pageRendering = false;
+                    if (pageNumPending !== null) {
+                        renderPage(pageNumPending);
+                        pageNumPending = null;
+                    }
+                });
+            });
+        }
+
+        function queueRenderPage(num) {
+            if (pageRendering) {
+                pageNumPending = num;
+            } else {
+                renderPage(num);
+            }
+        }
+
+        pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
+            pdfDoc = pdfDoc_;
+            renderPage(pageNum);
+        });
+    </script>
 </body>
 </html>
+
